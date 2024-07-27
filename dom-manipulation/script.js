@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { text: "Get busy living or get busy dying.", category: "Motivational" }
     ];
 
-    function showRandomQuote() {
+    function displayRandomQuote() {
         const quoteDisplay = document.getElementById('quoteDisplay');
         const randomIndex = Math.floor(Math.random() * quotes.length);
         quoteDisplay.textContent = `"${quotes[randomIndex].text}" - ${quotes[randomIndex].category}`;
@@ -26,6 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    document.getElementById('newQuote').addEventListener('click', showRandomQuote);
+    document.getElementById('newQuote').addEventListener('click', displayRandomQuote);
     document.getElementById('addQuote').addEventListener('click', addQuote);
 });
