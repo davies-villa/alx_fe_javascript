@@ -5,6 +5,31 @@ let quotes = JSON.parse(localStorage.getItem('quotes')) || [
   { text: "Life is what happens when you're busy making other plans.", category: "Life" }
 ];
 
+// Function to create and append the Add Quote form
+function createAddQuoteForm() {
+  const formContainer = document.createElement('div');
+
+  const quoteInput = document.createElement('input');
+  quoteInput.id = 'newQuoteText';
+  quoteInput.type = 'text';
+  quoteInput.placeholder = 'Enter a new quote';
+  
+  const categoryInput = document.createElement('input');
+  categoryInput.id = 'newQuoteCategory';
+  categoryInput.type = 'text';
+  categoryInput.placeholder = 'Enter quote category';
+
+  const addButton = document.createElement('button');
+  addButton.textContent = 'Add Quote';
+  addButton.onclick = addQuote;
+
+  formContainer.appendChild(quoteInput);
+  formContainer.appendChild(categoryInput);
+  formContainer.appendChild(addButton);
+
+  document.body.appendChild(formContainer);
+}
+
 // Show a random quote
 function showRandomQuote() {
   const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -126,4 +151,5 @@ setInterval(fetchQuotesFromServer, 60000); // Check every 60 seconds
 
 // Initialize the app
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
+createAddQuoteForm(); // Initialize the add quote form
 updateCategoryFilter();
