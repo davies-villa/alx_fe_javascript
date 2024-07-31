@@ -168,4 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch quotes from the server when the page loads
     fetchQuotesFromServer();
+
+    // Periodically sync quotes with the server every 10 minutes (600000 ms)
+    setInterval(syncQuotes, 600000);
 });
