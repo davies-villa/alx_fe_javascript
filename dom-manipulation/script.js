@@ -43,7 +43,7 @@ function addQuote() {
         };
         quotes.push(newQuote);
         saveQuotes();
-        populateCategoryFilter();
+        populateCategoryFilter(); // Correct function name
         showRandomQuote();
         postQuoteToServer(newQuote);
         notifyUser('Quote added and posted to server.');
@@ -59,7 +59,7 @@ function importFromJsonFile(event) {
         const importedQuotes = JSON.parse(event.target.result);
         quotes.push(...importedQuotes);
         saveQuotes();
-        populateCategoryFilter();
+        populateCategoryFilter(); // Correct function name
         notifyUser('Quotes imported successfully!');
     };
     fileReader.readAsText(event.target.files[0]);
@@ -101,7 +101,7 @@ async function fetchQuotesFromServer() {
 
         quotes.push(...formattedQuotes);
         saveQuotes();
-        populateCategoryFilter();
+        populateCategoryFilter(); // Correct function name
         showRandomQuote();
         notifyUser('Quotes fetched and updated successfully from server!');
     } catch (error) {
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadQuotes();
     createAddQuoteForm();
     showRandomQuote();
-    populateCategoryFilter();
+    populateCategoryFilter(); // Correct function name
 
     fetchQuotesFromServer();
     setInterval(syncQuotes, 600000); // Sync every 10 minutes
