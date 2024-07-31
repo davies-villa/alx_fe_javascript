@@ -46,7 +46,7 @@ function addQuote() {
       const newQuote = { text: newQuoteText, category: newQuoteCategory };
       quotes.push(newQuote);
       saveQuotes();
-      updateCategoryFilter();
+      populateCategories(); // Update categories after adding a new quote
       alert('Quote added successfully!');
   } else {
       alert('Please fill in both fields.');
@@ -58,8 +58,8 @@ function saveQuotes() {
   localStorage.setItem('quotes', JSON.stringify(quotes));
 }
 
-// Update the category filter dropdown
-function updateCategoryFilter() {
+// Function to populate the category filter dropdown
+function populateCategories() {
   const categoryFilter = document.getElementById('categoryFilter');
   const uniqueCategories = [...new Set(quotes.map(quote => quote.category))];
 
@@ -103,7 +103,7 @@ function importFromJsonFile(event) {
       const importedQuotes = JSON.parse(event.target.result);
       quotes.push(...importedQuotes);
       saveQuotes();
-      updateCategoryFilter();
+      populateCategories(); // Update categories after importing quotes
       alert('Quotes imported successfully!');
   };
   fileReader.readAsText(event.target.files[0]);
@@ -118,7 +118,7 @@ async function fetchQuotesFromServer() {
       const convertedQuotes = serverQuotes.map(item => ({ text: item.title, category: 'Server' }));
       quotes.push(...convertedQuotes);
       saveQuotes();
-      updateCategoryFilter();
+      populateCategories(); // Update categories after fetching quotes
       alert('Quotes fetched from server successfully!');
   } catch (error) {
       console.error('Error fetching quotes from server:', error);
@@ -152,4 +152,4 @@ setInterval(fetchQuotesFromServer, 60000); // Check every 60 seconds
 // Initialize the app
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 createAddQuoteForm(); // Initialize the add quote form
-updateCategoryFilter();
+populateCategories(); // Populate the category filter on page load
