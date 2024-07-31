@@ -94,20 +94,14 @@ async function fetchQuotesFromServer() {
         const serverQuotes = await response.json();
 
         // Assume each post from JSONPlaceholder has a title as the quote and "Server Data" as a category
-        serverQuotes.forEach(post => {
-            const quote = {
-                text: post.title,
-                category: "Server Data"
-            };
-            quotes.push(quote);
-        });
+        const formattedQuotes = serverQuotes.map(post => ({
+            text: post.title,
+            category: "Server Data"
+        }));
 
         // Save the updated quotes array to local storage
         saveQuotes();
-
-        // Display the first quote fetched from the server
         showRandomQuote();
-
         console.log('Quotes fetched and updated successfully from server!');
     } catch (error) {
         console.error('Error fetching quotes from server:', error);
@@ -133,6 +127,35 @@ async function postQuoteToServer(quote) {
         console.log('Quote posted successfully:', result);
     } catch (error) {
         console.error('Error posting quote to server:', error);
+    }
+}
+
+// Function to sync local quotes with the server
+async function syncQuotes() {
+    try {
+        // Fetch quotes from the server
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        const serverQuotes = await response.json();
+        
+        // Format the server quotes
+        const formattedServerQuotes = serverQuotes.map(post => ({
+            text: post.title,
+            category: "Server Data"
+        }));
+
+        // Compare server quotes with local quotes and update as needed
+        const localQuoteTexts = quotes.map(quote => quote.text);
+        const newQuotes = formattedServerQuotes.filter(serverQuote => !localQuoteTexts.includes(serverQuote.text));
+
+        // Update local quotes with new server quotes
+        if (newQuotes.length > 0) {
+            quotes.push(...newQuotes);
+            saveQuotes();
+            console.log('Local quotes updated with new server quotes.');
+        }
+
+    } catch (error) {
+        console.error('Error syncing quotes with server:', error);
     }
 }
 
