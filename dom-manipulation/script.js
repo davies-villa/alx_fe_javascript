@@ -34,6 +34,34 @@ function addQuote() {
   }
 }
 
+// Function to create the form to add new quotes
+function createAddQuoteForm() {
+  // Create form elements
+  const formContainer = document.createElement('div');
+
+  const inputQuoteText = document.createElement('input');
+  inputQuoteText.id = 'newQuoteText';
+  inputQuoteText.type = 'text';
+  inputQuoteText.placeholder = 'Enter a new quote';
+
+  const inputQuoteCategory = document.createElement('input');
+  inputQuoteCategory.id = 'newQuoteCategory';
+  inputQuoteCategory.type = 'text';
+  inputQuoteCategory.placeholder = 'Enter quote category';
+
+  const addButton = document.createElement('button');
+  addButton.textContent = 'Add Quote';
+  addButton.addEventListener('click', addQuote);
+
+  // Append elements to form container
+  formContainer.appendChild(inputQuoteText);
+  formContainer.appendChild(inputQuoteCategory);
+  formContainer.appendChild(addButton);
+
+  // Append form container to the body or a specific element
+  document.body.appendChild(formContainer);
+}
+
 // Function to export quotes as a JSON file
 function exportQuotes() {
   const dataStr = JSON.stringify(quotes);
@@ -108,6 +136,7 @@ document.getElementById('categoryFilter').addEventListener('change', function() 
 // Call these functions on page load
 populateCategories();
 applyLastSelectedFilter();
+createAddQuoteForm();
 
 // Event listener to show a new quote when the button is clicked
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
