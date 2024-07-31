@@ -10,29 +10,23 @@
 <body>
   <h1>Dynamic Quote Generator</h1>
 
-  <!-- Dropdown to filter by category -->
   <select id="categoryFilter" onchange="filterQuotes()">
     <option value="all">All Categories</option>
   </select>
 
-  <!-- Placeholder for displaying quotes -->
   <div id="quoteDisplay"></div>
-
-  <!-- Button to show a new quote -->
   <button id="newQuote">Show New Quote</button>
 
-  <!-- Form to add new quotes -->
   <div>
     <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
     <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
     <button onclick="addQuote()">Add Quote</button>
   </div>
 
-  <!-- Button to export quotes -->
   <button onclick="exportQuotes()">Export Quotes</button>
 
-  <!-- Input to import quotes from a JSON file -->
   <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+
 </body>
 
 </html>
