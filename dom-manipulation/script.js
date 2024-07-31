@@ -98,6 +98,19 @@ async function fetchQuotesFromServer() {
   }
 }
 
+function exportQuotes() {
+  const dataStr = JSON.stringify(quotes);
+  const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
+  const exportFileDefaultName = 'quotes.json';
+
+  const linkElement = document.createElement('a');
+  linkElement.setAttribute('href', dataUri);
+  linkElement.setAttribute('download', exportFileDefaultName);
+  linkElement.click();
+}
+
+
 async function postQuoteToServer(quote) {
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
